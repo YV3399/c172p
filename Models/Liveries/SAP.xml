@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+    <sim>
+        <model>
+            <livery>
+                <name type="string">SAP</name>
+                <index type="int">1</index>
+                <texture>Liveries/SAP/fuselage.SAP.png</texture>
+            </livery>
+            <liverytail>
+                <name type="string">SAP</name>
+                <index type="int">1</index>
+                <texture>Liveries/SAP/tail.SAP.png</texture>
+            </liverytail>
+            <liverywing>
+                <name type="string">SAP</name>
+                <index type="int">1</index>
+                <texture>Liveries/SAP/wing.SAP.png</texture>
+            </liverywing>
+            <liveryfloat>
+                <name type="string">SAP</name>
+                <index type="int">1</index>
+                <texture>Liveries/SAP/floats.png</texture>
+            </liveryfloat>
+            <liveryinterior>
+                <name type="string">SAP</name>
+                <index type="int">1</index>
+                <texture>Liveries/SAP/interior.png</texture>
+            </liveryinterior>
+            <liverypanel>
+                <name type="string">SAP</name>
+                <index type="int">1</index>
+                <texture>Liveries/SAP/panel.png</texture>
+            </liverypanel>
+            <liveryparts>
+                <name type="string">SAP</name>
+                <index type="int">1</index>
+                <texture>Liveries/SAP/panel_parts.png</texture>
+            </liveryparts>
+            <liveryinstrumentsai>
+                <name type="string">SAP</name>
+                <index type="int">1</index>
+                <texture>AI1-2.png</texture>
+            </liveryinstrumentsai>
+            <liveryinstrumentsai2>
+                <name type="string">SAP</name>
+                <index type="int">1</index>
+                <texture>AI2-2.png</texture>
+            </liveryinstrumentsai2>
+            <c172p>
+                <immat>false</immat>
+                <immat-on-panel>false</immat-on-panel>
+                <fairing1>false</fairing1>
+                <fairing2>true</fairing2>
+                <fairing3>true</fairing3>
+            </c172p>
+        </model>
+    </sim>
+</PropertyList>
