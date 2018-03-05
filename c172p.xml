@@ -13,7 +13,7 @@
         <!-- Source: http://forum.flightgear.org/viewtopic.php?f=25&t=21664&start=45 -->
         <!-- this file with comments for stall and spin to help -->
         <!-- further modifications for c172p-detailed 2015 - 2018 -->
-        <description> Cessna C-172 </description>
+        <description> Cessna 172P Skyhawk </description>
     </fileheader>
 
     <metrics>
@@ -219,7 +219,7 @@
             <location unit="IN">
                 <x> -6.8 </x>
                 <y> 0 </y>
-                <z> -19.5 </z>
+                <z> -20.3 </z>
             </location>
             <static_friction> 0.8 </static_friction>
             <dynamic_friction> 0.5 </dynamic_friction>
@@ -234,7 +234,7 @@
             <location unit="IN">
                 <x> 58.2 </x>
                 <y> -43 </y>
-                <z> -15.5 </z>
+                <z> -15.3 </z>
             </location>
             <static_friction> 0.8 </static_friction>
             <dynamic_friction> 0.5 </dynamic_friction>
@@ -249,7 +249,7 @@
             <location unit="IN">
                 <x> 58.2 </x>
                 <y> 43 </y>
-                <z> -15.5 </z>
+                <z> -15.1 </z>
             </location>
             <static_friction> 0.8 </static_friction>
             <dynamic_friction> 0.5 </dynamic_friction>
@@ -1069,6 +1069,24 @@
             </product>
         </function>
 
+        <function name="aero/function/vel-propwash-fps">
+            <description> propeller induced velocity </description>
+            <sum>
+                <property>propulsion/engine/prop-induced-velocity_fps</property>
+                <property>propulsion/engine[1]/prop-induced-velocity_fps</property>
+            </sum>
+        </function>
+
+        <function name="aero/function/qbar-propwash-psf">
+            <description> q bar due to the propeller induced velocity </description>
+            <product>
+                <property>aero/function/vel-propwash-fps</property>
+                <property>aero/function/vel-propwash-fps</property>
+                <property>atmosphere/rho-slugs_ft3</property>
+                <value>0.5</value>
+            </product>
+        </function>
+
         <function name="aero/function/velocity-induced-fps">
             <description> velocity including the propulsion induced velocity.</description>
             <sum>
@@ -1640,6 +1658,16 @@
                 </product>
             </function>
 
+            <function name="aero/coefficient/Cnspw">
+                <description>Yaw_moment_due_to_spiraling_propwash</description>
+                <product>
+                    <property>aero/function/qbar-propwash-psf</property>
+                    <property>metrics/Sw-sqft</property>
+                    <property>metrics/bw-ft</property>
+                    <value>-0.05</value>
+                </product>
+            </function> 
+
             <function name="aero/coefficient/Cnr">
                 <description>Yaw_moment_due_to_yaw_rate</description>
                 <product>
@@ -1872,6 +1900,34 @@
                 <z>1.0</z>
             </direction>
         </force>
+        <force name="ai-wake" frame="BODY">
+            <location unit="IN">
+                <!-- Center of the main wing leading edge -->
+                <x>32.0</x>
+                <y> 0.0</y>
+                <z>52.5</z>
+            </location>
+            <direction>
+                <!-- These are dummy values. They are ignored by FlightGear.
+                     Their purpose is to avoid JSBSim display warning messages
+                     about <direction> not being specified.
+                     -->
+                <x>1.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+            </direction>
+        </force>
+        <moment name="ai-wake" frame="BODY">
+            <direction>
+                <!-- These are dummy values. They are ignored by FlightGear.
+                     Their purpose is to avoid JSBSim display warning messages
+                     about <direction> not being specified.
+                     -->
+                <x>1.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+            </direction>
+        </moment>
     </external_reactions>
 
     <system file="bushkit"/>

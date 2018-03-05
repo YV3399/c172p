@@ -47,6 +47,16 @@
         </binding>
     </key>
 
+    <key n="102">
+        <name>f</name>
+        <desc>Toggle flashlight</desc>
+        <repeatable type="bool">true</repeatable>
+        <binding>
+            <command>nasal</command>
+            <script>c172p.toggle_flashlight()</script>
+        </binding>
+    </key>
+
     <key n="108">
         <name>l</name>
         <desc>Increase Panel lighting</desc>
@@ -142,6 +152,15 @@
         <binding>
             <command>nasal</command>
             <script>gui.showWeightDialog()</script>
+        </binding>
+    </key>
+
+    <key n="81">
+        <name>Q</name>
+        <desc>Reset view</desc>
+        <binding>
+            <command>nasal</command>
+            <script>c172p.pilot_view()</script>
         </binding>
     </key>
 

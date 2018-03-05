@@ -19,7 +19,7 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
 <PropertyList include="Aircraft/Generic/Human/Include/walker-include.xml">
 
     <sim include="c172p-views.xml">
-        <description>Cessna 172P Skyhawk (1981 model, detailed)</description>
+        <description>Cessna 172P Skyhawk (1982)</description>
 
         <long-description>The Cessna 172 Skyhawk is a four-seat, single-engine, high-wing fixed-wing aircraft. First flown in 1955 and still in production, more Cessna 172s have been built than any other aircraft.</long-description>
 
@@ -46,7 +46,7 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
         <author>Original by David Megginson, gsagostinho (Gilberto Agostinho), wlbragg (Wayne Bragg), Juanvvc (Juan Vera del Campo), onox, thevirtualfer, Dany93 (Daniel Dubreuil), dg-505 (Jonathan Schellhase), tigert (Tuomas Kuosmanen), AndersG (Anders Gidenstam), wkitty42 (Waldo Kitty), algefaen, Horacio, D-ECHO, Jarl Arntzen (jarlarntzen)</author>
 
         <status>advanced production</status>
-        <aircraft-version>2017.2-git</aircraft-version>
+        <aircraft-version>2018.2-git</aircraft-version>
         <rating>
             <FDM type="int">4</FDM>
             <systems type="int">5</systems>
@@ -348,13 +348,13 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
         <systems>
             <path>Aircraft/c172p/Systems/systems.xml</path>
 
-            <autopilot>
+            <autopilot n="0">
                 <path>Systems/KAP140.xml</path>
             </autopilot>
-            <autopilot>
+            <autopilot n="1">
                 <path>Systems/glass-rain.xml</path>
             </autopilot>
-            <autopilot>
+            <autopilot n="2">
                 <path>Systems/control-lock.xml</path>
             </autopilot>
 
@@ -494,8 +494,8 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
 
     <controls>
         <flight>
-            <aileron-trim type="double">0.027</aileron-trim>
-            <rudder-trim type="double">0.0</rudder-trim>
+            <aileron-trim type="double">0.02</aileron-trim>
+            <rudder-trim type="double">0.013</rudder-trim>
 
             <freeze-yoke type="bool">false</freeze-yoke>
             <aileron-cmd type="double">0.0</aileron-cmd>
@@ -604,6 +604,10 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
 
     <environment>
         <aircraft-effects>
+            <dirt-edge type="float">0</dirt-edge>
+            <dirt-fuselage type="float">0</dirt-fuselage>
+            <dirt-wing type="float">0</dirt-wing>
+            <dirt-tail type="float">0</dirt-tail>
             <cabin-heat-set type="double">0.0</cabin-heat-set>
             <cabin-air-set type="double">0.0</cabin-air-set>
         </aircraft-effects>
@@ -615,7 +619,12 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
             <config>
                 <tumble-flag archive="y" type="bool">true</tumble-flag>
             </config>
-        </attitude-indicator>
+        </attitude-indicator> <image>Models/Effects/exterior/dirt.png</image>
+            <type>2d</type>
+            <filter>linear-mipmap-linear</filter>
+            <wrap-s>repeat</wrap-s>
+            <wrap-t>repeat</wrap-t>
+            <internal-format>normalized</internal-format>
         <encoder>
             <serviceable type="bool">true</serviceable>
         </encoder>
@@ -805,6 +814,7 @@ http://forum.flightgear.org/viewtopic.php?f=4&t=25157
             <!-- Damage Mod -->
             <file>Nasal/physics.nas</file>
             <file>Nasal/tiedowns.nas</file>
+            <file>Nasal/views.nas</file>
         </c172p>
         <electrical>
             <file>Nasal/electrical.nas</file>

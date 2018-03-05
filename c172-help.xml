@@ -13,6 +13,10 @@
         <desc>Toggle yokes hidden/visible</desc>
     </key>
     <key>
+        <name>f</name>
+        <desc>Toggle flashlight white/red/off</desc>
+    </key>
+    <key>
         <name>P</name>
         <desc>Toggle high resolution panel on/off</desc>
     </key>
@@ -27,6 +31,10 @@
     <key>
         <name>r/R</name>
         <desc>Move water rudders up/down (float plane)</desc>
+    </key>
+    <key>
+        <name>Q</name>
+        <desc>Reset view</desc>
     </key>
 
     <line/>

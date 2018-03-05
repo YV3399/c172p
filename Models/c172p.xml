@@ -411,20 +411,29 @@
     </params>
 
     <!-- exterior effects -->
-    <!-- Normal shader effect. Separate effects required for each normal map texture -->
+    <!-- Normal shader effect. Separate effects required for each normal map and dirt texture -->
     <effect>
-        <inherits-from>Effects/exterior/bumpspec-wing</inherits-from>
+        <inherits-from>Effects/exterior/dirt-leading-edge</inherits-from>
+        <object-name>wing_leading_edge</object-name>
+    </effect>
+    <effect>
+        <inherits-from>Effects/exterior/dirt-wing</inherits-from>
         <object-name>flaps</object-name>
         <object-name>leftaileron</object-name>
         <object-name>rightaileron</object-name>
-        <object-name>wing_1</object-name>
+        <object-name>wing_1.001</object-name>
         <object-name>PitotTube</object-name>
+        <object-name>FuelCapPort</object-name>
+        <object-name>FuelCapStarboard</object-name>
+        <object-name>LeftNavLight</object-name>
+        <object-name>RightNavLight</object-name>
     </effect>
     <effect>
-        <inherits-from>Effects/exterior/bumpspec-fuselage</inherits-from>
+        <inherits-from>Effects/exterior/dirt-fuselage</inherits-from>
+        <object-name>NoseWheelStrut</object-name>
         <object-name>LeftWheelStrut</object-name>
         <object-name>RightWheelStrut</object-name>
-        <object-name>baggagedoor</object-name>
+        <object-name>baggagedoorexterior</object-name>
         <object-name>charniere1</object-name>
         <object-name>charniere2</object-name>
         <object-name>charniere3</object-name>
@@ -432,7 +441,7 @@
         <object-name>fairing1</object-name>
         <object-name>fairing2</object-name>
         <object-name>fairing3</object-name>
-        <object-name>fuselage_1</object-name>
+        <object-name>fuselage_1.001</object-name>
         <object-name>leftdoor</object-name>
         <object-name>rightdoor</object-name>
         <object-name>Spinner</object-name>
@@ -440,23 +449,41 @@
         <object-name>NoseWheel</object-name>
         <object-name>LeftWheel</object-name>
         <object-name>RightWheel</object-name>
+        <object-name>radi_box</object-name>
+        <object-name>TieDownTail</object-name>
+        <object-name>TieDownRight</object-name>
+        <object-name>TieDownLeft</object-name>
+        <object-name>TransponderAntenna</object-name>
+        <object-name>Antenna_ADF</object-name>
+        <object-name>Antenna_VOR</object-name>
+        <object-name>VHFAntenna</object-name>
+        <object-name>BeaconMount</object-name>
+        <object-name>Exhaust</object-name>
+        <object-name>Axle</object-name>
+        <object-name>ruddercableleft</object-name>
+        <object-name>ruddercableright</object-name>
+        <object-name>ruddercableports</object-name>
+        <object-name>ruddercablelefthinge</object-name>
+        <object-name>ruddercablerighthinge</object-name>
     </effect>
     <effect>
-        <inherits-from>Effects/exterior/bumpspec-tail</inherits-from>
+        <inherits-from>Effects/exterior/dirt-tail</inherits-from>
         <object-name>elevatorleft</object-name>
         <object-name>elevatorright</object-name>
         <object-name>hstab</object-name>
         <object-name>rudder_1</object-name>
         <object-name>vstab</object-name>
     </effect>
+    <effect>
+        <inherits-from>Effects/exterior/bumpspec-wing</inherits-from>
+        <object-name>wing_0</object-name>
+        <object-name>landinglight2</object-name>
+        <object-name>landinglight1</object-name>
+    </effect>
 
     <effect>
         <inherits-from>Effects/model-transparent</inherits-from>
         <object-name>landinglightcover</object-name>
-        <!--object-name>landinglightcoverLD</object-name>
-        <object-name>landinglightcoverRD</object-name>
-        <object-name>landinglightcoverBD</object-name>
-        <object-name>landinglightcoverCollapse</object-name-->
         <object-name>strobe1</object-name>
         <object-name>strobe2</object-name>
         <object-name>BeaconOffX</object-name>
@@ -480,7 +507,7 @@
         <type>material</type>
         <object-name>LeftWheelStrut</object-name>
         <object-name>RightWheelStrut</object-name>
-        <object-name>baggagedoor</object-name>
+        <object-name>baggagedoorexterior</object-name>
         <object-name>charniere1</object-name>
         <object-name>charniere2</object-name>
         <object-name>charniere3</object-name>
@@ -491,8 +518,7 @@
         <object-name>fairing2</object-name>
         <object-name>fairing3</object-name>
         <object-name>flaps</object-name>
-        <object-name>fuselage_0</object-name>
-        <object-name>fuselage_1</object-name>
+        <object-name>fuselage_1.001</object-name>
         <object-name>hstab</object-name>
         <object-name>leftaileron</object-name>
         <object-name>leftdoor</object-name>
@@ -500,10 +526,35 @@
         <object-name>rightdoor</object-name>
         <object-name>rudder_1</object-name>
         <object-name>vstab</object-name>
-        <object-name>wing_1</object-name>
+        <object-name>wing_1.001</object-name>
+        <object-name>wing_leading_edge</object-name>
         <object-name>doorhandleint_right</object-name>
-        <object-name>Propeller</object-name>
         <object-name>Spinner</object-name>
+        <object-name>radi_box</object-name>
+        <object-name>LeftNavLight</object-name>
+        <object-name>RightNavLight</object-name>
+        <object-name>landinglight1</object-name>
+        <object-name>BeaconMount</object-name>
+        <object-name>FuelCapPort</object-name>
+        <object-name>FuelCapStarboard</object-name>
+        <object-name>ruddercableports</object-name>
+        <shininess>116</shininess>
+        <specular>
+            <r>1</r>
+            <g>1</g>
+            <b>1</b>
+        </specular>
+        <ambient>
+            <r>1</r>
+            <g>1</g>
+            <b>1</b>
+        </ambient>
+    </animation>
+
+    <!-- Specularity fix -->
+    <animation>
+        <type>material</type>
+        <object-name>NoseWheelStrut</object-name>
         <shininess>128</shininess>
         <specular>
             <r>1</r>
@@ -519,9 +570,16 @@
 
     <!-- interior effects  -->
     <effect>
+        <inherits-from>Aircraft/c172p/Models/Effects/interior/c172p-interior-radiance</inherits-from>
+        <object-name>TrimWheel</object-name>
+    </effect>
+
+    <effect>
         <inherits-from>Effects/interior/c172p-interior</inherits-from>
+        <object-name>baggagedoorinterior</object-name>
         <object-name>wing_1L</object-name>
         <object-name>wing_1R</object-name>
+        <object-name>wing_1C</object-name>
         <object-name>Firewall</object-name>
         <object-name>AirVent_left</object-name>
         <object-name>AirVent_right</object-name>
@@ -529,7 +587,7 @@
         <object-name>doorint_right</object-name>
         <object-name>doorint_left</object-name>
         <object-name>CeilingSpeaker</object-name>
-        <object-name>TrimWheel</object-name>
+        <!--object-name>TrimWheel</object-name-->
         <object-name>ElevatorTrimPos</object-name>
         <object-name>FuelSelectorFace</object-name>
         <object-name>FuelSelectorLeft</object-name>
@@ -1043,9 +1101,9 @@
         <name>OAT-object</name>
         <path>Interior/Panel/Instruments/oat/oat.xml</path>
         <offsets>
-            <x-m>-0.0375</x-m>
             <y-m>0.44</y-m>
-            <z-m>0.482</z-m>
+            <x-m>-0.01922</x-m>
+            <z-m>0.46375</z-m>
         </offsets>
     </model>
     <!-- MODEND -->
@@ -3676,11 +3734,24 @@
         <!-- Damage Mod -->
         <object-name>flapsD</object-name>
         <property>surface-positions/flap-pos-norm</property>
-        <factor>0.07</factor>
+        <factor>0.08</factor>
         <axis>
             <x>1.0</x>
             <y>0.0</y>
             <z>0.0</z>
+        </axis>
+    </animation>
+    <animation>
+        <type>translate</type>
+        <object-name>flaps</object-name>
+        <!-- Damage Mod -->
+        <object-name>flapsD</object-name>
+        <property>surface-positions/flap-pos-norm</property>
+        <factor>-0.10</factor>
+        <axis>
+            <x>0.0</x>
+            <y>0.0</y>
+            <z>1.0</z>
         </axis>
     </animation>
     <animation>
@@ -3773,9 +3844,12 @@
     </animation>-->
     <animation>
         <type>rotate</type>
-        <object-name>rudder</object-name>
+        <object-name>rudder_0</object-name>
         <object-name>rudder_1</object-name>
         <object-name>RearNavLightOff</object-name>
+        <object-name>nav-light-tail</object-name>
+        <object-name>ruddercablelefthinge</object-name>
+        <object-name>ruddercablerighthinge</object-name>
         <property>surface-positions/rudder-pos-norm</property>
         <factor>13</factor>
         <axis>
@@ -3787,6 +3861,118 @@
             <z2-m>1.007</z2-m>
         </axis>
     </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>ruddercableleft</object-name>
+        <property>surface-positions/rudder-pos-norm</property>
+        <factor>3</factor>
+        <center>
+            <x-m> 4.75597</x-m>
+            <y-m>-0.08369</y-m>
+            <z-m>-0.54047</z-m>
+        </center>
+        <axis>
+            <x>0.0</x>
+            <y>0.0</y>
+            <z>1.0</z>
+        </axis>
+    </animation>
+    <animation>
+        <type>translate</type>
+        <object-name>ruddercableleft</object-name>
+        <property>surface-positions/rudder-pos-norm</property>
+        <factor>.03</factor>
+        <axis>
+            <x>1.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+        </axis>
+    </animation>
+    <animation>
+        <type>translate</type>
+        <object-name>ruddercableleft</object-name>
+        <property>surface-positions/rudder-pos-norm</property>
+        <factor>-.008</factor>
+        <axis>
+            <x>0.0</x>
+            <y>0.0</y>
+            <z>1.0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>ruddercablelefthinge</object-name>
+        <property>surface-positions/rudder-pos-norm</property>
+        <factor>40</factor>
+        <center>
+            <x-m> 4.97326</x-m>
+            <y-m>-0.03545</y-m>
+            <z-m>-0.54239</z-m>
+        </center>
+        <axis>
+            <x>0.0</x>
+            <y>0.0</y>
+            <z>1.0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>ruddercableright</object-name>
+        <property>surface-positions/rudder-pos-norm</property>
+        <factor>3</factor>
+        <center>
+            <x-m> 4.75019</x-m>
+            <y-m> 0.08448</y-m>
+            <z-m>-0.54046</z-m>
+        </center>
+        <axis>
+            <x>0.0</x>
+            <y>0.0</y>
+            <z>1.0</z>
+        </axis>
+    </animation>
+    <animation>
+        <type>translate</type>
+        <object-name>ruddercableright</object-name>
+        <property>surface-positions/rudder-pos-norm</property>
+        <factor>-.03</factor>
+        <axis>
+            <x>1.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+        </axis>
+    </animation>
+    <animation>
+        <type>translate</type>
+        <object-name>ruddercableright</object-name>
+        <property>surface-positions/rudder-pos-norm</property>
+        <factor>.008</factor>
+        <axis>
+            <x>0.0</x>
+            <y>0.0</y>
+            <z>1.0</z>
+        </axis>
+    </animation>
+    <animation>
+        <type>rotate</type>
+        <object-name>ruddercablerighthinge</object-name>
+        <property>surface-positions/rudder-pos-norm</property>
+        <factor>40</factor>
+        <center>
+            <x-m> 4.97487</x-m>
+            <y-m> 0.03545</y-m>
+            <z-m>-0.54239</z-m>
+        </center>
+        <axis>
+            <x>0.0</x>
+            <y>0.0</y>
+            <z>1.0</z>
+        </axis>
+    </animation>
+
     <animation>
         <type>rotate</type>
         <object-name>fairing1</object-name>
@@ -4519,15 +4705,18 @@
     <!-- Wings No Damage -->
     <animation>
         <type>select</type>
-        <object-name>wing_1</object-name>
+        <object-name>wing_1.001</object-name>
+        <object-name>wing_leading_edge</object-name>
         <object-name>wing_0</object-name>
+        <object-name>wing_1L</object-name>
+        <object-name>wing_1R</object-name>
+        <object-name>wing_1C</object-name>
         <object-name>rightaileron</object-name>
         <object-name>leftaileron</object-name>
         <object-name>flaps</object-name>
         <object-name>RightNavLight</object-name>
         <object-name>LeftNavLight</object-name>
         <object-name>landinglightcover</object-name>
-        <object-name>landinglight2</object-name>
         <condition>
             <and>
                 <equals>
@@ -5933,13 +6122,6 @@
     <animation>
         <type>select</type>
         <object-name>landinglight</object-name>
-        <!-- Damage Mod
-        <object-name>landinglightBD</object-name>
-        <object-name>landinglightCollapse</object-name>
-        <object-name>landinglight2BD</object-name>
-        <object-name>landinglight2LD</object-name>
-        <object-name>landinglight2RD</object-name>
-        <object-name>landinglight2Collapse</object-name> -->
         <nopreview/>
         <condition>
             <and>
@@ -5966,7 +6148,27 @@
         </condition>
     </animation>
 
-    <!-- Recessed Light -->
+    <!-- Recessed Light Off -->
+    <animation>
+        <type>select</type>
+        <object-name>landinglight1</object-name>
+        <nopreview/>
+        <condition>
+            <and>
+                <not>
+                    <property alias="/params/lighting/landing/property"/>
+                </not>
+                <not>
+                    <property alias="/params/lighting/taxi/property"/>
+                </not>
+                <not>
+                    <property>/sim/rendering/rembrandt/enabled</property>
+                </not>
+            </and>
+        </condition>
+    </animation>
+
+    <!-- Recessed Light  On -->
     <animation>
         <type>select</type>
         <object-name>landinglight2</object-name>
@@ -5983,6 +6185,7 @@
             </and>
         </condition>
     </animation>
+
 
     <animation>
         <type>light</type>
@@ -6082,11 +6285,6 @@
     <animation>
         <type>select</type>
         <object-name>landinglightcover</object-name>
-        <!-- Damage Mod 
-        <object-name>landinglightcoverBD</object-name>
-        <object-name>landinglightcoverLD</object-name>
-        <object-name>landinglightcoverRD</object-name>
-        <object-name>landinglightcoverCollapse</object-name>-->
         <condition>
             <not>
                 <property alias="/params/lighting/landing/property"/>
@@ -6097,18 +6295,12 @@
         <type>noshadow</type>
         <object-name>landinglight</object-name>
         <object-name>taxilight</object-name>
-        <!-- Damage Mod 
-        <object-name>landinglightBD</object-name>
-        <object-name>landinglightCollapse</object-name>-->
     </animation>
 
     <!--Landing Light-->
     <animation>
         <type>flash</type>
         <object-name>landinglight</object-name>
-        <!-- Damage Mod 
-        <object-name>landinglightBD</object-name>
-        <object-name>landinglightCollapse</object-name>-->
         <center>
             <x-m>-0.135</x-m>
             <y-m>-2.940</y-m>
@@ -6371,12 +6563,12 @@
     <animation>
         <type>translate</type>
         <object-name>BeaconOffX</object-name>
-        <offset-m>5.618312</offset-m>
+        <offset-m>5.595</offset-m>
         <axis>
             <!-- MOD: Position beacon light at MEDIAN point of the object -->
             <x> 5.49464</x>
-            <y>-0.00000</y>
-            <z> 1.11533</z>
+            <y> 0.00000</y>
+            <z> 1.11300</z>
             <!-- MODEND: Position beacon light at MEDIAN point of the object -->
         </axis>
     </animation>
@@ -6505,11 +6697,13 @@
         <object-name>charniere4</object-name>
         <object-name>leftdoor</object-name>
         <object-name>rightdoor</object-name>
-        <object-name>baggagedoor</object-name>
+        <object-name>baggagedoorexterior</object-name>
         <object-name>Spinner</object-name>
         <object-name>Propeller</object-name>
         <object-name>LeftNavLight</object-name>
         <object-name>RightNavLight</object-name>
+        <object-name>radi_box</object-name>
+        <object-name>ruddercableports</object-name>
         <!-- damage mod -->
         <object-name>RightWheelStrutBKD</object-name>
         <object-name>LeftWheelStrutBKD</object-name>
@@ -6537,7 +6731,8 @@
     <animation>
         <type>material</type>
         <!--global type="bool">true</global-->
-        <object-name>wing</object-name>
+        <object-name>wing_1.001</object-name>
+        <object-name>wing_leading_edge</object-name>
         <object-name>flaps</object-name>
         <object-name>rightaileron</object-name>
         <object-name>leftaileron</object-name>
@@ -7206,7 +7401,7 @@
         <offsets>
             <x-m>-0.19</x-m>
             <y-m>-1.525</y-m>
-            <z-m>0.337</z-m>
+            <z-m> 0.300</z-m>
         </offsets>
     </model>
     <animation>
@@ -8340,7 +8535,7 @@
         <path>Interior/FE-ELT/elt.xml</path>
         <offsets>
             <x-m>-1.30</x-m>
-            <y-m>0.0</y-m>
+            <y-m> 0.00407</y-m>
             <z-m>-0.3</z-m>
             <heading-deg>0.0</heading-deg>
         </offsets>
