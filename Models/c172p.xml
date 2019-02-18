@@ -277,6 +277,33 @@
             <property>/sim/model/c172p/garmin196-visible</property>
         </condition>
     </animation>
+    
+    <animation>
+        <type>select</type>
+        <object-name>clock</object-name>
+        <condition>
+            <not>
+                <property>sim/model/c172p/digitalclock-visible</property>
+            </not>
+        </condition>
+    </animation>
+    
+    <animation>
+        <type>select</type>
+        <object-name>digital-clock</object-name>
+        <condition>
+            <property>sim/model/c172p/digitalclock-visible</property>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>RudderTrimBase</object-name>
+        <object-name>RudderTrimKnob</object-name>
+        <condition>
+            <property>sim/model/c172p/ruddertrim-visible</property>
+        </condition>
+    </animation>
 
     <animation>
         <type>select</type>
@@ -365,6 +392,7 @@
             var securing_state_path = rplayer.getNode("sim/multiplay/generic/int[9]").getPath();
 
             var pitot_cover   = rplayer.initNode("sim/model/c172p/securing/pitot-cover-visible", 0, "BOOL");
+            var cowl_plugs    = rplayer.initNode("sim/model/c172p/securing/cowl-plugs-visible", 0, "BOOL");
             var wheel_chock   = rplayer.initNode("sim/model/c172p/securing/chock-visible", 0, "BOOL");
             var left_tiedown  = rplayer.initNode("sim/model/c172p/securing/tiedownL-visible", 0, "BOOL");
             var right_tiedown = rplayer.initNode("sim/model/c172p/securing/tiedownR-visible", 0, "BOOL");
@@ -377,6 +405,7 @@
                 left_tiedown.setBoolValue(bits.test(state, 2));
                 right_tiedown.setBoolValue(bits.test(state, 3));
                 tail_tiedown.setBoolValue(bits.test(state, 4));
+                cowl_plugs.setBoolValue(bits.test(state, 5));
             }, 1, 0);
 
             # Make sure human occupants are always visible in remote aircraft
@@ -521,6 +550,7 @@
         <securing>
             <pitot-cover>sim/model/c172p/securing/pitot-cover-visible</pitot-cover>
             <chocks>sim/model/c172p/securing/chock-visible</chocks>
+            <cowl-plugs>sim/model/c172p/securing/cowl-plugs-visible</cowl-plugs>
             <tiedowns>
                 <left>
                     <visible>sim/model/c172p/securing/tiedownL-visible</visible>
@@ -598,6 +628,7 @@
         <object-name>rightdoorhandle</object-name>
         <object-name>Spinner</object-name>
         <object-name>Propeller</object-name>
+        <object-name>PropellerCowlPlugs</object-name>
         <object-name>NoseWheel</object-name>
         <object-name>LeftWheel</object-name>
         <object-name>RightWheel</object-name>
@@ -836,6 +867,9 @@
         <object-name>doorhandleint_right</object-name>
         <object-name>doorhandleint_left</object-name>
         <object-name>CeilingSpeaker</object-name>
+        <object-name>DomeSliderWhite</object-name>
+        <object-name>DomeSwitchWhite</object-name>
+        <object-name>DomeSwitchRed</object-name>
         <object-name>light-knob-base</object-name>
         <object-name>AltStaticAir</object-name>
         <object-name>LowVoltageLed</object-name>
@@ -848,10 +882,11 @@
         <object-name>InstrumentCover</object-name>
         <object-name>panel_1_1.inf</object-name>
         <object-name>panel_1_1_right</object-name>
-        <object-name>Panel_0</object-name>
         <object-name>gloveboxdoor</object-name>
         <object-name>glovebox</object-name>
         <object-name>gloveboxfull</object-name>
+        <object-name>RudderTrimBase</object-name>
+        <object-name>RudderTrimKnob</object-name>
     </effect>
     <effect>
         <inherits-from>Aircraft/c172p/Models/Effects/interior/lm-interior-fuel-selector</inherits-from>
@@ -912,6 +947,125 @@
         <object-name>glas_interior_back</object-name>
     </effect>
 
+    <animation>
+        <type>material</type>
+        <object-name>TrimWheel</object-name>
+        <object-name>AvionicsSwitch</object-name>
+        <object-name>radio-light-knob</object-name>
+        <object-name>panel-light-knob</object-name>
+        <object-name>gloveboxlock</object-name>
+        <object-name>Panel_0</object-name>
+        <object-name>ElevatorTrimPos</object-name>
+        <object-name>mike_mount</object-name>
+        <object-name>CabinAirMounts</object-name>
+        <object-name>CabinAir</object-name>
+        <object-name>CabinHeat</object-name>
+        <object-name>BeaconSwitch</object-name>
+        <object-name>CarbHeat</object-name>
+        <object-name>CarbHeatMount</object-name>
+        <object-name>GenSwitch</object-name>
+        <object-name>LandingLightSwitch</object-name>
+        <object-name>MasterSwitch</object-name>
+        <object-name>Mixture</object-name>
+        <object-name>MixtureMount</object-name>
+        <object-name>NavLightSwitch</object-name>
+        <object-name>PitotHeatSwitch</object-name>
+        <object-name>PrimerLeverMount</object-name>
+        <object-name>StrobeSwitch</object-name>
+        <object-name>TaxiLightSwitch</object-name>
+        <object-name>Throttle</object-name>
+        <object-name>ThrottleMount</object-name>
+        <object-name>mike</object-name>
+        <object-name>mike_chord</object-name>
+        <object-name>ParkingBrake</object-name>
+        <object-name>PrimerLever</object-name>
+        <object-name>LeftBag</object-name>
+        <object-name>bolts</object-name>
+        <object-name>accport</object-name>
+        <object-name>autopilot_breaker</object-name>
+        <object-name>radio5_breaker</object-name>
+        <object-name>radio4_breaker</object-name>
+        <object-name>radio3_breaker</object-name>
+        <object-name>radio2_breaker</object-name>
+        <object-name>radio1_breaker</object-name>
+        <object-name>turn-coordinator_breaker</object-name>
+        <object-name>strobe_breaker</object-name>
+        <object-name>bcnlt_breaker</object-name>
+        <object-name>landing_breaker</object-name>
+        <object-name>navlt_breaker</object-name>
+        <object-name>intlt_breaker</object-name>
+        <object-name>instr_breaker</object-name>
+        <object-name>pitot-heat_breaker</object-name>
+        <object-name>master_breaker</object-name>
+        <object-name>flaps_breaker</object-name>
+        <object-name>BreakersBase</object-name>
+        <object-name>AvionicsSwitchBase</object-name>
+        <object-name>windlocket_right</object-name>
+        <object-name>windlocket_left</object-name>
+        <object-name>windlocketbak_right</object-name>
+        <object-name>windlocketbak_left</object-name>
+        <object-name>doorhandleint_right</object-name>
+        <object-name>doorhandleint_left</object-name>
+        <object-name>CeilingSpeaker</object-name>
+        <object-name>DomeSliderWhite</object-name>
+        <object-name>DomeSwitchWhite</object-name>
+        <object-name>DomeSwitchRed</object-name>
+        <object-name>light-knob-base</object-name>
+        <object-name>AltStaticAir</object-name>
+        <object-name>LowVoltageLed</object-name>
+        <object-name>LowVoltageLedBase</object-name>
+        <object-name>panel_1_gauges</object-name>
+        <object-name>Pedestal</object-name>
+        <object-name>InstrumentCover</object-name>
+        <object-name>panel_1_1.inf</object-name>
+        <object-name>panel_1_1_right</object-name>
+        <object-name>gloveboxdoor</object-name>
+        <object-name>glovebox</object-name>
+        <object-name>gloveboxfull</object-name>
+
+        <object-name>carpet</object-name>
+        <object-name>chassis</object-name>
+        <object-name>backseat_left</object-name>
+        <object-name>pilotseat_left</object-name>
+        <object-name>pilotseat_right</object-name>
+        <object-name>doorint_right</object-name>
+        <object-name>doorint_left</object-name>
+        <object-name>windowframeleftint</object-name>
+        <object-name>windowframerightint</object-name>
+        <object-name>baggagedoorinterior</object-name>
+        <object-name>AirVent_left</object-name>
+        <object-name>AirVent_right</object-name>
+        <object-name>wing_1L</object-name>
+        <object-name>wing_1R</object-name>
+        <object-name>visorleft</object-name>
+        <object-name>visorright</object-name>
+        <object-name>visorrodleft</object-name>
+        <object-name>visorrodright</object-name>
+        <object-name>visorbaseleft</object-name>
+        <object-name>visorbaseright</object-name>
+        <object-name>doorintstrapleft</object-name>
+        <object-name>doorintstrapright</object-name>
+
+        <object-name>FuelSelectorFace</object-name>
+        <object-name>FuelSelectorLeft</object-name>
+        <object-name>FuelSelectorRight</object-name>
+        <object-name>FuelSelectorBoth</object-name>
+        <object-name>FuelSelectorOff</object-name>
+
+        <object-name>RudderTrimBase</object-name>
+        <object-name>RudderTrimKnob</object-name>
+        <condition>
+            <not>
+                <property>/sim/rendering/shaders/skydome</property>
+            </not>
+        </condition>
+        <emission>
+            <red-prop>/sim/model/c172p/lighting/rgb-ra-r-factor</red-prop>
+            <green-prop>/sim/model/c172p/lighting/rgb-ra-g-factor</green-prop>
+            <blue-prop>/sim/model/c172p/lighting/rgb-ra-b-factor</blue-prop>
+        </emission>
+    </animation>
+        
     <!-- Courtesy Light -->
     <animation>
         <type>material</type>
@@ -1501,7 +1655,7 @@
     </animation>
     <model>
         <name>lvled</name>
-        <path>Effects/interior/procedural_light_indicator_led_orange.xml</path>
+        <path>Effects/interior/procedural_light_indicator_led_lowvoltage.xml</path>
         <offsets>
             <x-m>-0.35</x-m>
             <y-m>-0.363</y-m>
@@ -1776,6 +1930,11 @@
         <name>clock</name>
         <path>Interior/Panel/Instruments/clock/clock.xml</path>
     </model>
+    <model>
+        <name>digital-clock</name>
+        <path>Interior/Panel/Instruments/digital-clock/digital-clock.xml</path>
+    </model>
+
     <model>
         <name>vac</name>
         <path>Interior/Panel/Instruments/vac/vac.xml</path>
@@ -3039,7 +3198,7 @@
     <animation>
         <type>knob</type>
         <object-name>visorleft</object-name>
-        <property>controls/visorleft/position-deg</property>
+        <property>controls/visors/left/visor-position-deg</property>
         <factor>1</factor>
         <drag-direction>vertical</drag-direction>
         <offset-deg>0</offset-deg>
@@ -3056,10 +3215,10 @@
         <action>
             <binding>
                 <command>property-adjust</command>
-                <property>controls/visorleft/position-deg</property>
+                <property>controls/visors/left/visor-position-deg</property>
                 <factor>5</factor>
-                <min>0</min>
-                <max>140</max>
+                <min>10</min>
+                <max>90</max>
                 <wrap>false</wrap>
             </binding>
         </action>
@@ -3067,7 +3226,7 @@
     <animation>
         <type>knob</type>
         <object-name>visorright</object-name>
-        <property>controls/visorright/position-deg</property>
+        <property>controls/visors/right/visor-position-deg</property>
         <factor>1</factor>
         <drag-direction>vertical</drag-direction>
         <offset-deg>0</offset-deg>
@@ -3084,10 +3243,10 @@
         <action>
             <binding>
                 <command>property-adjust</command>
-                <property>controls/visorright/position-deg</property>
+                <property>controls/visors/right/visor-position-deg</property>
                 <factor>5</factor>
-                <min>0</min>
-                <max>140</max>
+                <min>10</min>
+                <max>90</max>
                 <wrap>false</wrap>
             </binding>
         </action>
@@ -3095,8 +3254,8 @@
     <animation>
         <type>knob</type>
         <object-name>visorrodleft</object-name>
-        <!--object-name>visorbaseleft</object-name-->
-        <property>controls/visorrodleft/position-deg</property>
+        <object-name>visorleft</object-name>
+        <property>controls/visors/left/rod-position-deg</property>
         <factor>1</factor>
         <drag-direction>horizontal</drag-direction>
         <offset-deg>0</offset-deg>
@@ -3113,36 +3272,19 @@
         <action>
             <binding>
                 <command>property-adjust</command>
-                <property>controls/visorrodleft/position-deg</property>
+                <property>controls/visors/left/rod-position-deg</property>
                 <factor>5</factor>
                 <min>-30</min>
-                <max>15</max>
+                <max>12</max>
                 <wrap>false</wrap>
             </binding>
         </action>
-    </animation>
-    <animation>
-        <type>rotate</type>
-        <object-name>visorleft</object-name>
-        <property>controls/visorrodleft/position-deg</property>
-        <factor>1</factor>
-        <offset-deg>0</offset-deg>
-        <center>
-            <x-m> 0.10647</x-m>
-            <y-m>-0.40846</y-m>
-            <z-m> 0.47832</z-m>
-        </center>
-        <axis>
-            <x>.3</x>
-            <y>.03</y>
-            <z>1</z>
-        </axis>
     </animation>
     <animation>
         <type>knob</type>
         <object-name>visorrodright</object-name>
-        <!--object-name>visorbaseright</object-name-->
-        <property>controls/visorrodright/position-deg</property>
+        <object-name>visorright</object-name>
+        <property>controls/visors/right/rod-position-deg</property>
         <factor>1</factor>
         <drag-direction>horizontal</drag-direction>
         <offset-deg>0</offset-deg>
@@ -3159,30 +3301,13 @@
         <action>
             <binding>
                 <command>property-adjust</command>
-                <property>controls/visorrodright/position-deg</property>
+                <property>controls/visors/right/rod-position-deg</property>
                 <factor>5</factor>
                 <min>-30</min>
-                <max>15</max>
+                <max>12</max>
                 <wrap>false</wrap>
             </binding>
         </action>
-    </animation>
-    <animation>
-        <type>rotate</type>
-        <object-name>visorright</object-name>
-        <property>controls/visorrodright/position-deg</property>
-        <factor>1</factor>
-        <offset-deg>0</offset-deg>
-        <center>
-            <x-m>0.1063 </x-m>
-            <y-m>0.40887</y-m>
-            <z-m>0.48035</z-m>
-        </center>
-        <axis>
-            <x>-.3</x>
-            <y>-.03</y>
-            <z>-1</z>
-        </axis>
     </animation>
 
     <!-- MOD: animation for the checklists -->
@@ -3608,22 +3733,16 @@
             <repeatable>false</repeatable>
             <binding>
                 <condition>
-                    <or>
+                    <and>
                         <equals>
                             <property>/sim/model/door-positions/baggageDoor/position-norm</property>
-                            <value>1</value>
+                            <value>0</value>
                         </equals>
-                        <and>
-                            <equals>
-                                <property>/sim/model/door-positions/baggageDoor/position-norm</property>
-                                <value>0</value>
-                            </equals>
-                            <less-than>
-                                <property>velocities/groundspeed-kt</property>
-                                <value>1.0</value>
-                            </less-than>
-                        </and>
-                    </or>
+                        <less-than>
+                            <property>velocities/groundspeed-kt</property>
+                            <value>1.0</value>
+                        </less-than>
+                    </and>
                 </condition>
                 <command>nasal</command>
                 <script>c172p.baggageDoor.toggle();</script>
@@ -3652,8 +3771,69 @@
         <hovered>
             <binding>
                 <command>set-tooltip</command>
-                <tooltip-id>door-handle-baggage</tooltip-id>
-                <label>Baggage Door Open/Close</label>
+                <tooltip-id>oppen-baggage-door</tooltip-id>
+                <label>Open Baggage Door</label>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>BaggageDoorHotSpot</object-name>
+        <condition>
+            <and>
+                <equals>
+                    <property>/sim/model/door-positions/baggageDoor/position-norm</property>
+                    <value>1</value>
+                </equals>
+                <less-than>
+                    <property>velocities/groundspeed-kt</property>
+                    <value>1.0</value>
+                </less-than>
+            </and>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>BaggageDoorHotSpot</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <condition>
+                    <and>
+                        <equals>
+                            <property>/sim/model/door-positions/baggageDoor/position-norm</property>
+                            <value>1</value>
+                        </equals>
+                        <less-than>
+                            <property>velocities/groundspeed-kt</property>
+                            <value>1.0</value>
+                        </less-than>
+                    </and>
+                </condition>
+                <command>nasal</command>
+                <script>c172p.baggageDoor.toggle();</script>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <condition>
+                    <and>
+                        <equals>
+                            <property>/sim/model/door-positions/baggageDoor/position-norm</property>
+                            <value>1</value>
+                        </equals>
+                        <less-than>
+                            <property>velocities/groundspeed-kt</property>
+                            <value>1.0</value>
+                        </less-than>
+                    </and>
+                </condition>
+                <command>set-tooltip</command>
+                <tooltip-id>close-baggage-door</tooltip-id>
+                <label>Close Baggage Door</label>
             </binding>
         </hovered>
     </animation>
@@ -3877,9 +4057,12 @@
                             <property>/fdm/jsbsim/gear/unit[23]/WOW</property>
                             <property>/fdm/jsbsim/hydro/active-norm</property>
                         </or>
-                        <not>
-                            <property>/sim/current-view/internal</property>
-                        </not>
+                        <or>
+                            <not>
+                                <property>/sim/current-view/internal</property>
+                            </not>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
                     </and>
                 </condition>
                 <command>nasal</command>
@@ -3938,9 +4121,12 @@
                             <property>/fdm/jsbsim/gear/unit[23]/WOW</property>
                             <property>/fdm/jsbsim/hydro/active-norm</property>
                         </or>
-                        <not>
-                            <property>/sim/current-view/internal</property>
-                        </not>
+                        <or>
+                            <not>
+                                <property>/sim/current-view/internal</property>
+                            </not>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
                     </and>
                 </condition>
                 <command>set-tooltip</command>
@@ -5040,6 +5226,43 @@
         </center>
     </animation>
 
+    <animation>
+        <type>knob</type>
+        <object-name>RudderTrimKnob</object-name>
+        <property>controls/flight/rudder-trim-knob</property>
+        <factor>40</factor>
+        <drag-direction>horizontal</drag-direction>
+        <offset-deg>0</offset-deg>
+        <center>
+            <x-m>-0.521  </x-m>
+            <y-m> 0.00061</y-m>
+            <z-m>-0.56081</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+        <action>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/flight/rudder-trim-knob</property>
+                <factor>0.01</factor>
+                <min>-.18</min>
+                <max>.18</max>
+                <wrap>false</wrap>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <label>Rudder trim: %3.2f</label>
+                <tooltip-id>rudder-trim</tooltip-id>
+                <property>controls/flight/rudder-trim-knob</property>
+            </binding>
+        </hovered>
+    </animation>
+
     <!-- Panel light knob -->
     <animation>
         <type>knob</type>
@@ -6110,37 +6333,6 @@
         <max-m>60</max-m>
     </animation>
 
-    <!-- Airframe -->
-    <animation>
-        <type>select</type>
-        <object-name>Propeller</object-name>
-        <condition>
-            <less-than>
-                <property alias="/params/engine/rpm"/>
-                <value>500</value>
-            </less-than>
-        </condition>
-    </animation>
-    <animation>
-        <type>select</type>
-        <object-name>Propeller.Fast</object-name>
-        <nopreview/>
-        <condition>
-            <greater-than>
-                <property alias="/params/engine/rpm"/>
-                <value>400</value>
-            </greater-than>
-        </condition>
-    </animation>
-    <animation>
-        <type>blend</type>
-        <object-name>Propeller.Fast</object-name>
-        <property alias="/params/engine/rpm"/>
-        <factor>0.0004</factor>
-        <max>0.5</max>
-        <min>0.0</min>
-    </animation>
-
     <!-- ================================================================== -->
     <!-- ALS Lighting                                                       -->
     <!-- ================================================================== -->
@@ -6285,41 +6477,6 @@
                 </not>
             </and>
         </condition>
-    </animation>
-
-    <animation>
-        <type>spin</type>
-        <object-name>Propeller</object-name>
-        <object-name>Spinner</object-name>
-        <property alias="/params/engine/rpm"/>
-        <factor>-1</factor>
-        <center>
-            <x-m>-1.96139</x-m>
-            <y-m>0.00127</y-m>
-            <z-m>-0.0519</z-m>
-        </center>
-        <axis>
-            <x>1.0</x>
-            <y>0.0</y>
-            <z>0.0</z>
-        </axis>
-    </animation>
-    <animation>
-        <type>spin</type>
-        <object-name>Propeller.Fast</object-name>
-        <object-name>Spinner</object-name>
-        <property alias="/params/engine/rpm"/>
-        <factor>-0.001</factor>
-        <center>
-            <x-m>-1.96139</x-m>
-            <y-m>0.00127</y-m>
-            <z-m>-0.0519</z-m>
-        </center>
-        <axis>
-            <x>1.0</x>
-            <y>0.0</y>
-            <z>0.0</z>
-        </axis>
     </animation>
 
     <!-- Rotate Non-Damaged Left Aileron -->
@@ -6749,8 +6906,7 @@
         <object-name>NoseSkiWheel</object-name>
         <object-name>NoseSkiWheelAxleL</object-name>
         <object-name>NoseSkiWheelAxleR</object-name>
-        <property>surface-positions/rudder-pos-norm</property>
-        <factor>30</factor>
+        <property>fdm/jsbsim/fcs/steer-pos-deg</property>
         <axis>
             <x1-m>-0.975</x1-m>
             <y1-m>0</y1-m>
@@ -7367,7 +7523,7 @@
         <type>spin</type>
         <object-name>NoseSkiWheel</object-name>
         <property alias="/params/gear-ski/ski-nose-rollspeed-ms"/>
-        <factor>20</factor>
+        <factor>125</factor>
         <axis>
             <x>0</x>
             <y>-1</y>
@@ -7383,7 +7539,7 @@
         <type>spin</type>
         <object-name>LeftSkiWheel</object-name>
         <property alias="/params/gear-ski/ski-left-rollspeed-ms"/>
-        <factor>18</factor>
+        <factor>100</factor>
         <axis>
             <x>0</x>
             <y>-1</y>
@@ -7399,7 +7555,7 @@
         <type>spin</type>
         <object-name>RightSkiWheel</object-name>
         <property alias="/params/gear-ski/ski-right-rollspeed-ms"/>
-        <factor>18</factor>
+        <factor>100</factor>
         <axis>
             <x>0</x>
             <y>-1</y>
@@ -7419,13 +7575,90 @@
     <animation>
         <type>select</type>
         <object-name>Propeller</object-name>
+        <condition>
+             <and>
+                <less-than>
+                    <property alias="/params/engine/rpm"/>
+                    <value>500</value>
+                </less-than>
+                <not>
+                    <property alias="/params/securing/cowl-plugs"/>
+                </not>
+                <not>
+                    <property alias="/params/engine/crashed"/>
+                </not>
+            </and>
+        </condition>
+    </animation>
+    <animation>
+        <type>select</type>
         <object-name>Spinner</object-name>
-        <object-name>Propeller.Fast</object-name>
         <condition>
             <not>
                 <property alias="/params/engine/crashed"/>
             </not>
         </condition>
+    </animation>
+    <animation>
+        <type>select</type>
+        <object-name>Propeller.Fast</object-name>
+        <nopreview/>
+        <condition>
+            <and>
+                <greater-than>
+                    <property alias="/params/engine/rpm"/>
+                    <value>400</value>
+                </greater-than>
+                <not>
+                    <property alias="/params/securing/cowl-plugs"/>
+                </not>
+                <not>
+                    <property alias="/params/engine/crashed"/>
+                </not>
+            </and>
+        </condition>
+    </animation>
+    <animation>
+        <type>blend</type>
+        <object-name>Propeller.Fast</object-name>
+        <property alias="/params/engine/rpm"/>
+        <factor>0.0004</factor>
+        <max>0.5</max>
+        <min>0.0</min>
+    </animation>
+    <animation>
+        <type>spin</type>
+        <object-name>Propeller</object-name>
+        <object-name>Spinner</object-name>
+        <property alias="/params/engine/rpm"/>
+        <factor>-1</factor>
+        <center>
+            <x-m>-1.96139</x-m>
+            <y-m>0.00127</y-m>
+            <z-m>-0.0519</z-m>
+        </center>
+        <axis>
+            <x>1.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+        </axis>
+    </animation>
+    <animation>
+        <type>spin</type>
+        <object-name>Propeller.Fast</object-name>
+        <object-name>Spinner</object-name>
+        <property alias="/params/engine/rpm"/>
+        <factor>-0.001</factor>
+        <center>
+            <x-m>-1.96139</x-m>
+            <y-m>0.00127</y-m>
+            <z-m>-0.0519</z-m>
+        </center>
+        <axis>
+            <x>1.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+        </axis>
     </animation>
 
     <!-- Prop Damaged -->
@@ -9366,6 +9599,7 @@
         <object-name>baggagedoorhandle</object-name>
         <object-name>Spinner</object-name>
         <object-name>Propeller</object-name>
+        <object-name>PropellerCowlPlugs</object-name>
         <object-name>LeftNavLight</object-name>
         <object-name>RightNavLight</object-name>
         <object-name>radi_box</object-name>
@@ -9506,6 +9740,8 @@
         <object-name>GROUP_FrontPanels</object-name>
         <!-- MODEND: resume all to Panel_Rack_Base -->
         <property-base>sim/model/liverypanel/</property-base>
+        <object-name>RudderTrimBase</object-name>
+        <object-name>RudderTrimKnob</object-name>
         <texture-prop>texture</texture-prop>
         <texture>panel.png</texture>
     </animation>
@@ -9815,12 +10051,11 @@
             <z>0.940</z>
         </axis>
     </animation>
-    <!-- MOD: Spin to amphibious gears -->
     <animation>
         <type>spin</type>
         <object-name>LFrontWheel</object-name>
         <property alias="/params/gear-amphibious/front-left-rollspeed-ms"/>
-        <factor>13</factor>
+        <factor>75</factor>
         <axis>
             <x>0</x>
             <y>-1</y>
@@ -9836,7 +10071,7 @@
         <type>spin</type>
         <object-name>RFrontWheel</object-name>
         <property alias="/params/gear-amphibious/front-right-rollspeed-ms"/>
-        <factor>13</factor>
+        <factor>75</factor>
         <axis>
             <x>0</x>
             <y>-1</y>
@@ -9847,10 +10082,8 @@
             <y-m>1.16615</y-m>
             <z-m>-2.06557</z-m>
         </center>
--2.10993
     </animation>
 
-    <!-- MODEND: Spin to amphibious gears -->
     <animation>
         <type>rotate</type>
         <object-name>LRtarm</object-name>
@@ -9935,7 +10168,7 @@
         <type>spin</type>
         <object-name>LRwheel</object-name>
         <property alias="/params/gear-amphibious/rear-left-rollspeed-ms"/>
-        <factor>13</factor>
+        <factor>52</factor>
         <axis>
             <x>0</x>
             <y>-1</y>
@@ -9951,7 +10184,7 @@
         <type>spin</type>
         <object-name>RRwheel</object-name>
         <property alias="/params/gear-amphibious/rear-right-rollspeed-ms"/>
-        <factor>13</factor>
+        <factor>52</factor>
         <axis>
             <x>0</x>
             <y>-1</y>
@@ -10107,17 +10340,60 @@
         </condition>
     </animation>
 
+    <!-- Dim Toggle Switch -->
+    <animation>
+        <type>pick</type>
+        <object-name>Dim.toggle</object-name>
+        <visible>true</visible>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-toggle</command>
+                <property>/controls/lighting/gearled</property>
+            </binding>
+            <binding>
+                <command>nasal</command>
+                <script>c172p.click("avionics")</script>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>led-dim-switch</tooltip-id>
+                <label>Dim Gear Panel LED's</label>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>Dim.toggle</object-name>
+        <property>/controls/lighting/gearled</property>
+        <factor>30</factor>
+        <axis>
+            <x>0.0</x>
+            <y>1.0</y>
+            <z>0.0</z>
+        </axis>
+        <center>
+            <x-m>-0.35939</x-m>
+            <y-m> 0.22687</y-m>
+            <z-m> 0.09171</z-m>
+        </center>
+    </animation>
+
     <animation>
         <type>material</type>
         <object-name>GearAdvisory</object-name>
         <condition>
             <and>
                 <greater-than>
-                    <property>/velocities/airspeed-kt</property>
+                    <property>/velocities/groundspeed-kt</property>
                     <value>10</value>
                 </greater-than>
                 <less-than>
-                   <property>/velocities/airspeed-kt</property>
+                   <property>/velocities/groundspeed-kt</property>
                    <value>70</value>
                 </less-than>
                 <property alias="/params/cockpit/electrical/gear-amphibious"/>
@@ -10127,6 +10403,7 @@
             <red>1</red>
             <green>0.26</green>
             <blue>0.05</blue>
+            <factor-prop>/controls/lighting/factor-led</factor-prop>
         </emission>
     </animation>
     <model>
@@ -10140,11 +10417,11 @@
         <condition>
             <and>
                 <greater-than>
-                    <property>/velocities/airspeed-kt</property>
+                    <property>/velocities/groundspeed-kt</property>
                     <value>10</value>
                 </greater-than>
                 <less-than>
-                   <property>/velocities/airspeed-kt</property>
+                   <property>/velocities/groundspeed-kt</property>
                    <value>70</value>
                 </less-than>
                 <property alias="/params/cockpit/electrical/gear-amphibious"/>
@@ -10178,6 +10455,7 @@
             </and>
         </condition>
     </animation>
+
     <model>
         <name>nosedn1led</name>
         <path>Effects/interior/procedural_light_indicator_led_green.xml</path>
@@ -10568,6 +10846,25 @@
     </model>
 
     <animation>
+        <type>material</type>
+        <object-name>noseup1</object-name>
+        <object-name>noseup2</object-name>
+        <object-name>mainup1</object-name>
+        <object-name>mainup2</object-name>
+        <object-name>nosedn1</object-name>
+        <object-name>nosedn2</object-name>
+        <object-name>maindn1</object-name>
+        <object-name>maindn2</object-name>
+        <object-name>pump</object-name>
+        <emission>
+            <red>  .3</red>
+            <green>.3</green>
+            <blue> .3</blue>
+            <factor-prop>/controls/lighting/factor-led</factor-prop>
+        </emission>
+    </animation>
+
+    <animation>
         <type>rotate</type>
         <object-name>Gearswitch</object-name>
         <property>controls/gear/gear-down</property>
@@ -10663,15 +10960,15 @@
             <repeatable>false</repeatable>
             <binding>
                 <condition>
-                    <or>
-                        <and>
-                            <property>/sim/model/c172p/securing/pitot-cover-removable</property>
+                    <and>
+                        <property>/sim/model/c172p/securing/pitot-cover-removable</property>
+                        <or>
                             <not>
                                 <property>/sim/current-view/internal</property>
                             </not>
-                        </and>
-                        <property>/nasal/tutorial/loaded</property>
-                    </or>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
+                    </and>
                 </condition>
                 <command>property-assign</command>
                 <property alias="/params/securing/pitot-cover"/>
@@ -10681,15 +10978,15 @@
         <hovered>
             <binding>
                 <condition>
-                    <or>
-                        <and>
-                            <property>/sim/model/c172p/securing/pitot-cover-removable</property>
+                    <and>
+                        <property>/sim/model/c172p/securing/pitot-cover-removable</property>
+                        <or>
                             <not>
                                 <property>/sim/current-view/internal</property>
                             </not>
-                        </and>
-                        <property>/nasal/tutorial/loaded</property>
-                    </or>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
+                    </and>
                 </condition>
                 <command>set-tooltip</command>
                 <tooltip-id>remove-pitot-tube-cap</tooltip-id>
@@ -10705,15 +11002,15 @@
             <repeatable>false</repeatable>
             <binding>
                 <condition>
-                    <or>
-                        <and>
-                            <property>/sim/model/c172p/securing/pitot-cover-addable</property>
+                    <and>
+                        <property>/sim/model/c172p/securing/pitot-cover-addable</property>
+                        <or>
                             <not>
                                 <property>/sim/current-view/internal</property>
                             </not>
-                        </and>
-                        <property>/nasal/tutorial/loaded</property>
-                    </or>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
+                    </and>
                 </condition>
                 <command>property-assign</command>
                 <property alias="/params/securing/pitot-cover"/>
@@ -10728,19 +11025,129 @@
         <hovered>
             <binding>
                 <condition>
-                    <or>
-                        <and>
-                            <property>/sim/model/c172p/securing/pitot-cover-addable</property>
+                    <and>
+                        <property>/sim/model/c172p/securing/pitot-cover-addable</property>
+                        <or>
                             <not>
                                 <property>/sim/current-view/internal</property>
                             </not>
-                        </and>
-                        <property>/nasal/tutorial/loaded</property>
-                    </or>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
+                    </and>
                 </condition>
                 <command>set-tooltip</command>
                 <tooltip-id>put-pitot-tube-cap</tooltip-id>
                 <label>Put Pitot Tube Cap</label>
+            </binding>
+        </hovered>
+    </animation>
+
+    <!-- Cowl Plugs -->
+    <model>
+        <name>CowlPlugs</name>
+        <path>Exterior/cowlplugs/cowlplugs.xml</path>
+    </model>
+
+    <animation>
+        <type>select</type>
+        <object-name>CowlPlugs</object-name>
+        <condition>
+            <and>
+                <property alias="/params/securing/cowl-plugs"/>
+                <not>
+                    <property alias="/params/engine/crashed"/>
+                </not>
+            </and>
+        </condition>
+    </animation>
+    <animation>
+        <type>select</type>
+        <object-name>CowlPlugHotSpot</object-name>
+        <condition>
+            <property>/sim/model/c172p/securing/cowl-plugs-addable</property>
+            <or>
+                <not>
+                    <property>/sim/current-view/internal</property>
+                </not>
+                <property>/nasal/tutorial/loaded</property>
+            </or>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>CowlPlugs</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <condition>
+                    <property>/sim/model/c172p/securing/cowl-plugs-removable</property>
+                    <or>
+                        <not>
+                            <property>/sim/current-view/internal</property>
+                        </not>
+                        <property>/nasal/tutorial/loaded</property>
+                    </or>
+                </condition>
+                <command>property-assign</command>
+                <property>/sim/model/c172p/securing/cowl-plugs-visible</property>
+                <value>false</value>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <condition>
+                    <property>/sim/model/c172p/securing/cowl-plugs-removable</property>
+                    <or>
+                        <not>
+                            <property>/sim/current-view/internal</property>
+                        </not>
+                        <property>/nasal/tutorial/loaded</property>
+                    </or>
+                </condition>
+                <command>set-tooltip</command>
+                <tooltip-id>remove-cowl-plugs</tooltip-id>
+                <label>Remove Cowl Plugs</label>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>CowlPlugHotSpot</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <condition>
+                    <property>/sim/model/c172p/securing/cowl-plugs-addable</property>
+                    <or>
+                        <not>
+                            <property>/sim/current-view/internal</property>
+                        </not>
+                        <property>/nasal/tutorial/loaded</property>
+                    </or>
+                </condition>
+                <command>property-assign</command>
+                <property>sim/model/c172p/securing/cowl-plugs-visible</property>
+                <value>true</value>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <condition>
+                    <property>/sim/model/c172p/securing/cowl-plugs-addable</property>
+                    <or>
+                        <not>
+                            <property>/sim/current-view/internal</property>
+                        </not>
+                        <property>/nasal/tutorial/loaded</property>
+                    </or>
+                </condition>
+                <command>set-tooltip</command>
+                <tooltip-id>put-cowl-plugs</tooltip-id>
+                <label>Put Cowl Plugs</label>
             </binding>
         </hovered>
     </animation>
@@ -10750,9 +11157,9 @@
         <name>chock1</name>
         <path>Exterior/chock/chock.xml</path>
         <offsets>
-            <x-m>-0.02</x-m>
+            <x-m>-0.01</x-m>
             <y-m>0.0</y-m>
-            <z-m>0.032</z-m>
+            <z-m>0.008</z-m>
         </offsets>
     </model>
     <model>
@@ -10761,7 +11168,7 @@
         <offsets>
             <x-m>0.32</x-m>
             <y-m>0.0</y-m>
-            <z-m>0.028</z-m>
+            <z-m>0.020</z-m>
         </offsets>
     </model>
     <animation>
@@ -10796,9 +11203,9 @@
         <name>woodenchock</name>
         <path>Exterior/wooden-chock/woodenchock.xml</path>
         <offsets>
-            <x-m>-0.027</x-m>
+            <x-m>-0.029</x-m>
             <y-m>0.0</y-m>
-            <z-m>-0.088</z-m>
+            <z-m>-0.08</z-m>
         </offsets>
     </model>
     <animation>
@@ -10881,15 +11288,15 @@
             <repeatable>false</repeatable>
             <binding>
                 <condition>
-                    <or>
-                        <and>
-                            <property>/sim/model/c172p/securing/chock-addable</property>
+                    <and>
+                        <property>/sim/model/c172p/securing/chock-addable</property>
+                        <or>
                             <not>
                                 <property>/sim/current-view/internal</property>
                             </not>
-                        </and>
-                        <property>/nasal/tutorial/loaded</property>
-                    </or>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
+                    </and>
                 </condition>
                 <command>property-assign</command>
                 <property>sim/model/c172p/securing/chock</property>
@@ -10899,16 +11306,15 @@
         <hovered>
             <binding>
                 <condition>
-                    <property>/sim/model/c172p/securing/chock-addable</property>
-                    <or>
-                        <and>
-                            <property>/sim/model/c172p/securing/chock-addable</property>
+                    <and>
+                        <property>/sim/model/c172p/securing/chock-addable</property>
+                        <or>
                             <not>
                                 <property>/sim/current-view/internal</property>
                             </not>
-                        </and>
-                        <property>/nasal/tutorial/loaded</property>
-                    </or>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
+                    </and>
                 </condition>
                 <command>set-tooltip</command>
                 <tooltip-id>secure-with-wheel-chock</tooltip-id>
@@ -10994,15 +11400,15 @@
             <repeatable>false</repeatable>
             <binding>
                 <condition>
-                    <or>
-                        <and>
-                            <property>/sim/model/c172p/securing/tiedownL-addable</property>
+                    <and>
+                        <property>/sim/model/c172p/securing/tiedownL-addable</property>
+                        <or>
                             <not>
                                 <property>/sim/current-view/internal</property>
                             </not>
-                        </and>
-                        <property>/nasal/tutorial/loaded</property>
-                    </or>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
+                    </and>
                 </condition>
                 <command>property-assign</command>
                 <property alias="/params/securing/tiedowns/left/visible"/>
@@ -11012,15 +11418,15 @@
         <hovered>
             <binding>
                 <condition>
-                    <or>
-                        <and>
-                            <property>/sim/model/c172p/securing/tiedownL-addable</property>
+                    <and>
+                        <property>/sim/model/c172p/securing/tiedownL-addable</property>
+                        <or>
                             <not>
                                 <property>/sim/current-view/internal</property>
                             </not>
-                        </and>
-                        <property>/nasal/tutorial/loaded</property>
-                    </or>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
+                    </and>
                 </condition>
                 <command>set-tooltip</command>
                 <tooltip-id>secure-with-left-tiedowns</tooltip-id>
@@ -11106,15 +11512,15 @@
             <repeatable>false</repeatable>
             <binding>
                 <condition>
-                    <or>
-                        <and>
-                            <property>/sim/model/c172p/securing/tiedownR-addable</property>
+                    <and>
+                        <property>/sim/model/c172p/securing/tiedownR-addable</property>
+                        <or>
                             <not>
                                 <property>/sim/current-view/internal</property>
                             </not>
-                        </and>
-                        <property>/nasal/tutorial/loaded</property>
-                    </or>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
+                    </and>
                 </condition>
                 <command>property-assign</command>
                 <property alias="/params/securing/tiedowns/right/visible"/>
@@ -11124,15 +11530,15 @@
         <hovered>
             <binding>
                 <condition>
-                    <or>
-                        <and>
-                            <property>/sim/model/c172p/securing/tiedownR-addable</property>
+                    <and>
+                        <property>/sim/model/c172p/securing/tiedownR-addable</property>
+                        <or>
                             <not>
                                 <property>/sim/current-view/internal</property>
                             </not>
-                        </and>
-                        <property>/nasal/tutorial/loaded</property>
-                    </or>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
+                    </and>
                 </condition>
                 <command>set-tooltip</command>
                 <tooltip-id>secure-with-right-tiedowns</tooltip-id>
@@ -11218,15 +11624,15 @@
             <repeatable>false</repeatable>
             <binding>
                 <condition>
-                    <or>
-                        <and>
-                            <property>/sim/model/c172p/securing/tiedownT-addable</property>
+                    <and>
+                        <property>/sim/model/c172p/securing/tiedownT-addable</property>
+                        <or>
                             <not>
                                 <property>/sim/current-view/internal</property>
                             </not>
-                        </and>
-                        <property>/nasal/tutorial/loaded</property>
-                    </or>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
+                    </and>
                 </condition>
                 <command>property-assign</command>
                 <property alias="/params/securing/tiedowns/tail/visible"/>
@@ -11236,15 +11642,15 @@
         <hovered>
             <binding>
                 <condition>
-                    <or>
-                        <and>
-                            <property>/sim/model/c172p/securing/tiedownT-addable</property>
+                    <and>
+                        <property>/sim/model/c172p/securing/tiedownT-addable</property>
+                        <or>
                             <not>
                                 <property>/sim/current-view/internal</property>
                             </not>
-                        </and>
-                        <property>/nasal/tutorial/loaded</property>
-                    </or>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
+                    </and>
                 </condition>
                 <command>set-tooltip</command>
                 <tooltip-id>secure-with-tail-tiedowns</tooltip-id>
@@ -11260,9 +11666,12 @@
             <condition>
                 <and>
                     <property>/consumables/fuel/contamination_allowed</property>
-                    <not>
-                        <property>/sim/current-view/internal</property>
-                    </not>
+                    <or>
+                        <not>
+                            <property>/sim/current-view/internal</property>
+                        </not>
+                        <property>/nasal/tutorial/loaded</property>
+                    </or>
                 </and>
             </condition>
     </animation>
@@ -11286,9 +11695,12 @@
                             <property>/fdm/jsbsim/gear/unit[23]/WOW</property>
                             <property>/fdm/jsbsim/hydro/active-norm</property>
                         </or>
-                        <not>
-                            <property>/sim/current-view/internal</property>
-                        </not>
+                        <or>
+                            <not>
+                                <property>/sim/current-view/internal</property>
+                            </not>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
                     </and>
                 </condition>
                 <command>property-toggle</command>
@@ -11350,9 +11762,12 @@
                             <property>/fdm/jsbsim/gear/unit[23]/WOW</property>
                             <property>/fdm/jsbsim/hydro/active-norm</property>
                         </or>
-                        <not>
-                            <property>/sim/current-view/internal</property>
-                        </not>
+                        <or>
+                            <not>
+                                <property>/sim/current-view/internal</property>
+                            </not>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
                     </and>
                 </condition>
                 <command>set-tooltip</command>
@@ -11369,9 +11784,12 @@
             <condition>
                 <and>
                     <property>/consumables/fuel/contamination_allowed</property>
-                    <not>
-                        <property>/sim/current-view/internal</property>
-                    </not>
+                    <or>
+                        <not>
+                            <property>/sim/current-view/internal</property>
+                        </not>
+                        <property>/nasal/tutorial/loaded</property>
+                    </or>
                 </and>
             </condition>
     </animation>
@@ -11395,9 +11813,12 @@
                             <property>/fdm/jsbsim/gear/unit[23]/WOW</property>
                             <property>/fdm/jsbsim/hydro/active-norm</property>
                         </or>
-                        <not>
-                            <property>/sim/current-view/internal</property>
-                        </not>
+                        <or>
+                            <not>
+                                <property>/sim/current-view/internal</property>
+                            </not>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
                     </and>
                 </condition>
                 <command>property-toggle</command>
@@ -11459,9 +11880,12 @@
                             <property>/fdm/jsbsim/gear/unit[23]/WOW</property>
                             <property>/fdm/jsbsim/hydro/active-norm</property>
                         </or>
-                        <not>
-                            <property>/sim/current-view/internal</property>
-                        </not>
+                        <or>
+                            <not>
+                                <property>/sim/current-view/internal</property>
+                            </not>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
                     </and>
                 </condition>
                 <command>set-tooltip</command>
@@ -11491,9 +11915,12 @@
                             <property>/fdm/jsbsim/gear/unit[23]/WOW</property>
                             <property>/fdm/jsbsim/hydro/active-norm</property>
                         </or>
-                        <not>
-                            <property>/sim/current-view/internal</property>
-                        </not>
+                        <or>
+                            <not>
+                                <property>/sim/current-view/internal</property>
+                            </not>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
                         <equals>
                             <property>sim/model/door-positions/oilDoor/position-norm</property>
                             <value>1</value>
@@ -11516,9 +11943,12 @@
                             <property>/fdm/jsbsim/gear/unit[23]/WOW</property>
                             <property>/fdm/jsbsim/hydro/active-norm</property>
                         </or>
-                        <not>
-                            <property>/sim/current-view/internal</property>
-                        </not>
+                        <or>
+                            <not>
+                                <property>/sim/current-view/internal</property>
+                            </not>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
                     </and>
                 </condition>
                 <command>nasal</command>
@@ -11682,17 +12112,48 @@
                         <not>
                             <property>/engines/active-engine/running</property>
                         </not>
+                        <not>
+                            <property>/sim/model/c172p/cockpit/control-lock-placed</property>
+                        </not>
                         <less-than>
                             <property>velocities/groundspeed-kt</property>
                             <value>1.0</value>
                         </less-than>
-                        <not>
-                            <property>/sim/current-view/internal</property>
-                        </not>
+                        <or>
+                            <not>
+                                <property>/sim/current-view/internal</property>
+                            </not>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
                     </and>
                 </condition>
                 <command>nasal</command>
                 <script>c172p.control_surface_check_elevator();</script>
+            </binding>
+            <binding>
+                <condition>
+                    <and>
+                        <not>
+                            <property>/engines/active-engine/running</property>
+                        </not>
+                        <not>
+                            <property>/sim/model/c172p/cockpit/control-lock-placed</property>
+                        </not>
+                        <less-than>
+                            <property>velocities/groundspeed-kt</property>
+                            <value>1.0</value>
+                        </less-than>
+                        <or>
+                            <not>
+                                <property>/sim/current-view/internal</property>
+                            </not>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
+                    </and>
+                </condition>
+                <command>property-assign</command>
+                <property>/sim/model/c172p/control-surfaces/elevator-checked</property>
+                <value>true</value>
             </binding>
         </action>
     </animation>
@@ -11710,17 +12171,48 @@
                         <not>
                             <property>/engines/active-engine/running</property>
                         </not>
+                        <not>
+                            <property>/sim/model/c172p/cockpit/control-lock-placed</property>
+                        </not>
                         <less-than>
                             <property>velocities/groundspeed-kt</property>
                             <value>1.0</value>
                         </less-than>
-                        <not>
-                            <property>/sim/current-view/internal</property>
-                        </not>
+                        <or>
+                            <not>
+                                <property>/sim/current-view/internal</property>
+                            </not>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
                     </and>
                 </condition>
                 <command>nasal</command>
                 <script>c172p.control_surface_check_left_aileron();</script>
+            </binding>
+            <binding>
+                <condition>
+                    <and>
+                        <not>
+                            <property>/engines/active-engine/running</property>
+                        </not>
+                        <not>
+                            <property>/sim/model/c172p/cockpit/control-lock-placed</property>
+                        </not>
+                        <less-than>
+                            <property>velocities/groundspeed-kt</property>
+                            <value>1.0</value>
+                        </less-than>
+                        <or>
+                            <not>
+                                <property>/sim/current-view/internal</property>
+                            </not>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
+                    </and>
+                </condition>
+                <command>property-assign</command>
+                <property>/sim/model/c172p/control-surfaces/left-aileron-checked</property>
+                <value>true</value>
             </binding>
         </action>
     </animation>
@@ -11738,17 +12230,48 @@
                         <not>
                             <property>/engines/active-engine/running</property>
                         </not>
+                        <not>
+                            <property>/sim/model/c172p/cockpit/control-lock-placed</property>
+                        </not>
                         <less-than>
                             <property>velocities/groundspeed-kt</property>
                             <value>1.0</value>
                         </less-than>
-                        <not>
-                            <property>/sim/current-view/internal</property>
-                        </not>
+                        <or>
+                            <not>
+                                <property>/sim/current-view/internal</property>
+                            </not>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
                     </and>
                 </condition>
                 <command>nasal</command>
                 <script>c172p.control_surface_check_right_aileron();</script>
+            </binding>
+            <binding>
+                <condition>
+                    <and>
+                        <not>
+                            <property>/engines/active-engine/running</property>
+                        </not>
+                        <not>
+                            <property>/sim/model/c172p/cockpit/control-lock-placed</property>
+                        </not>
+                        <less-than>
+                            <property>velocities/groundspeed-kt</property>
+                            <value>1.0</value>
+                        </less-than>
+                        <or>
+                            <not>
+                                <property>/sim/current-view/internal</property>
+                            </not>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
+                    </and>
+                </condition>
+                <command>property-assign</command>
+                <property>/sim/model/c172p/control-surfaces/right-aileron-checked</property>
+                <value>true</value>
             </binding>
         </action>
     </animation>
@@ -11766,17 +12289,48 @@
                         <not>
                             <property>/engines/active-engine/running</property>
                         </not>
+                        <not>
+                            <property>/sim/model/c172p/cockpit/control-lock-placed</property>
+                        </not>
                         <less-than>
                             <property>velocities/groundspeed-kt</property>
                             <value>1.0</value>
                         </less-than>
-                        <not>
-                            <property>/sim/current-view/internal</property>
-                        </not>
+                        <or>
+                            <not>
+                                <property>/sim/current-view/internal</property>
+                            </not>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
                     </and>
                 </condition>
                 <command>nasal</command>
                 <script>c172p.control_surface_check_rudder();</script>
+            </binding>
+            <binding>
+                <condition>
+                    <and>
+                        <not>
+                            <property>/engines/active-engine/running</property>
+                        </not>
+                        <not>
+                            <property>/sim/model/c172p/cockpit/control-lock-placed</property>
+                        </not>
+                        <less-than>
+                            <property>velocities/groundspeed-kt</property>
+                            <value>1.0</value>
+                        </less-than>
+                        <or>
+                            <not>
+                                <property>/sim/current-view/internal</property>
+                            </not>
+                            <property>/nasal/tutorial/loaded</property>
+                        </or>
+                    </and>
+                </condition>
+                <command>property-assign</command>
+                <property>/sim/model/c172p/control-surfaces/rudder-checked</property>
+                <value>true</value>
             </binding>
         </action>
     </animation>

@@ -74,15 +74,19 @@ Mooring.setmoorage = func( index, moorage ) {
     print (" LAT ",latitudedeg," LON ",longitudedeg," HEAD ",headingdeg);
 
     # overwrite the coordinates from the original airport
-    me.presets.getChild("airport-id").setValue("");
-    me.presets.getChild("latitude-deg").setValue(latitudedeg);
-    me.presets.getChild("longitude-deg").setValue(longitudedeg);
-    me.presets.getChild("heading-deg").setValue(headingdeg);
-    me.presets.getChild("roll-deg").setValue(0);
-    me.presets.getChild("pitch-deg").setValue(0);
-    me.presets.getChild("airspeed-kt").setValue(0);
     # forces the computation of ground
-    me.presets.getChild("altitude-ft").setValue(-9999);
+    setprop("/sim/presets/altitude-ft", -9999);
+    setprop("/sim/presets/airspeed-kt", 0);
+    setprop("/sim/presets/roll-deg", 0);
+    setprop("/sim/presets/pitch-deg", 0);
+    setprop("/sim/presets/latitude-deg", latitudedeg);
+    setprop("/sim/presets/longitude-deg", longitudedeg);
+    setprop("/sim/presets/heading-deg", headingdeg);
+    setprop("/sim/presets/offset-distance-nm", 0);
+    setprop("/sim/presets/glideslope-deg", 0);
+    setprop("/sim/presets/runway", "");
+    setprop("/sim/presets/runway-requested", 0);
+    setprop("/sim/presets/airport-id", "");
 }
 
 Mooring.presetseaplane = func {
@@ -103,12 +107,16 @@ Mooring.presetseaplane = func {
         }
         if (!getprop("/controls/switches/master-bat")) {
             setprop("/controls/switches/master-bat", 1);
+            if (!getprop("/controls/switches/master-bat"))
+                setprop("/controls/switches/master-avionics");
             setprop("/controls/gear/gear-down", 0);
             setprop("/fdm/jsbsim/gear/gear-pos-norm", 0);
             settimer(func {
                 setprop("/controls/switches/master-bat", 0);
             }, 0.1);
         } else {
+            if (!getprop("/controls/switches/master-bat"))
+                setprop("/controls/switches/master-avionics");
             setprop("/controls/gear/gear-down", 0);
             setprop("/fdm/jsbsim/gear/gear-pos-norm", 0);
         }
@@ -128,6 +136,7 @@ Mooring.presetharbour = func {
                 print("PORT ",harbour,"    Index ",i);
                 me.setmoorage(i, airport);
                 me.prepareseaplane();
+                c172p.oil_consumption.stop();
                 fgcommand("reposition");
                 break;
             }
@@ -144,5 +153,5 @@ Mooring.prepareseaplane = func{
     setprop("/sim/model/c172p/securing/tiedownL-visible", 0);
     setprop("/sim/model/c172p/securing/tiedownR-visible", 0);
     setprop("/sim/model/c172p/securing/tiedownT-visible", 0);
-    setprop("/sim/model/c172p/securing/chock-visible", 0);
+    setprop("/sim/model/c172p/securing/chock", 0);
 }

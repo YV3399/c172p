@@ -527,7 +527,6 @@ Under the GPL. Used by shadows under ALS -->
                     <property>/fdm/jsbsim/bushkit</property>
                     <value>3</value>
                 </less-than>
-                <property>/sim/model/c172p/securing/allow-securing-aircraft</property>
                 <less-than>
                     <property>velocities/groundspeed-kt</property>
                     <value>1.0</value>
@@ -575,7 +574,6 @@ Under the GPL. Used by shadows under ALS -->
                 <not>
                     <property>/sim/model/c172p/securing/pitot-cover-visible</property>
                 </not>
-                <property>/sim/model/c172p/securing/allow-securing-aircraft</property>
                 <less-than>
                     <property>velocities/groundspeed-kt</property>
                     <value>1.0</value>
@@ -592,7 +590,6 @@ Under the GPL. Used by shadows under ALS -->
         <input>
             <and>
                 <property>/sim/model/c172p/securing/pitot-cover-visible</property>
-                <property>/sim/model/c172p/securing/allow-securing-aircraft</property>
                 <less-than>
                     <property>velocities/groundspeed-kt</property>
                     <value>1.0</value>
@@ -601,6 +598,37 @@ Under the GPL. Used by shadows under ALS -->
         </input>
         <output>
             <property>/sim/model/c172p/securing/pitot-cover-removable</property>
+        </output>
+    </logic>
+
+    <!-- logic for cowl plugs -->
+    <logic>
+        <name>Cowl Plugs Addable</name>
+        <input>
+            <and>
+                <not>
+                    <property>/sim/model/c172p/securing/cowl-plugs-visible</property>
+                </not>
+                <not>
+                    <property>/engines/active-engine/running</property>
+                </not>
+                <not>
+                    <property>/engines/active-engine/cranking</property>
+                </not>
+            </and>
+        </input>
+        <output>
+            <property>/sim/model/c172p/securing/cowl-plugs-addable</property>
+        </output>
+    </logic>
+
+    <logic>
+        <name>Cowl Plugs Removable</name>
+        <input>
+            <property>/sim/model/c172p/securing/cowl-plugs-visible</property>
+        </input>
+        <output>
+            <property>/sim/model/c172p/securing/cowl-plugs-removable</property>
         </output>
     </logic>
 
@@ -613,7 +641,6 @@ Under the GPL. Used by shadows under ALS -->
                     <property>/fdm/jsbsim/bushkit</property>
                     <value>3</value>
                 </not-equals>
-                <property>/sim/model/c172p/securing/allow-securing-aircraft</property>
                 <property>/fdm/jsbsim/ground/solid</property>
                 <less-than>
                     <property>velocities/groundspeed-kt</property>
@@ -833,6 +860,22 @@ Under the GPL. Used by shadows under ALS -->
         </input>
         <output>
             <property>/sim/model/door-positions/baggageDoor/opened</property>
+        </output>
+    </filter>
+
+    <!-- ============================================================== -->
+    <!-- Converting baggage weight from pounds to kilograms             -->
+    <!-- ============================================================== -->
+
+    <filter>
+        <name>Baggage: Pounds to Kilograms</name>
+        <type>gain</type>
+        <gain>0.45359237</gain>
+        <input>
+            <property>/payload/weight[4]/weight-lb</property>
+        </input>
+        <output>
+            <property>/payload/weight[4]/weight-kg</property>
         </output>
     </filter>
 

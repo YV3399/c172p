@@ -342,7 +342,7 @@ var update = func {
     elsif (usePrimer and !engine_running and getprop("/engines/active-engine/oil-temperature-degf") <= 75) {
         # Mixture is controlled by start conditions
         var primer = getprop("/controls/engines/engine/primer");
-        if (!getprop("/fdm/jsbsim/fcs/mixture-primer-cmd") and getprop("/controls/switches/starter")) {
+        if (!getprop("/fdm/jsbsim/fcs/mixture-primer-cmd") and getprop("/controls/switches/starter") and getprop("/controls/switches/master-bat")) {
             if (primer < 3) {
                 print("Use the primer!");
                 gui.popupTip("Use the primer!");
@@ -451,6 +451,18 @@ controls.mixtureAxis = func {
     var value = (1 - cmdarg().getNode("setting").getValue()) / 2;
     var new_value = std.max(0.0, std.min(value, 1.0));
     setprop("/controls/engines/current-engine/mixture", new_value);
+};
+
+var _axisMode = {
+    0: controls.perIndexAxisHandler("/controls/engines/current-engine[",
+        "]/throttle"),
+    1: controls.perIndexAxisHandler("/controls/engines/current-engine[",
+        "]/mixture"),
+    2: controls.perIndexAxisHandler("/controls/engines/current-engine[",
+        "]/propeller-pitch")
+};
+controls.perEngineSelectedAxisHandler = func(mode) {
+    return _axisMode[mode];
 };
 
 controls.stepMagnetos = func {
