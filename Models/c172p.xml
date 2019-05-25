@@ -164,31 +164,48 @@
             <z-m> 0.08948</z-m>
             <heading-deg>-19.0</heading-deg>
         </offsets>
-        <condition>
-            <not>
-                <equals>
-                   <property alias="/params/bushkit"/>
-                   <value>4</value>
-                </equals>
-            </not>
-        </condition>
+    </model>
+    <animation>
+        <type>translate</type>
+        <object-name>Garmin196-GPS-non-Canvas</object-name>
+        <property>/Interior/Panel/Instruments/garmin196/move</property>
+        <factor>0.1</factor>
+        <axis>
+            <x>0.0</x>
+            <y>1.0</y>
+            <z>0.0</z>
+        </axis>
+    </animation>
+
+    <!-- Canvas local Garmin 196 GPS -->
+    <!--<model>
+        <name>Garmin196-GPS</name>
+        <path>Interior/Panel/garmin196/garmin196.xml</path>
+        <offsets>
+            <x-m>-0.4</x-m>
+            <y-m>0.36</y-m>
+            <z-m>0.205</z-m>
+            <heading-deg>-12.0</heading-deg>
+        </offsets>
     </model>
     <model>
-        <name>Garmin196-GPS-non-Canvas</name>
-        <path>Interior/Panel/Instruments/garmin196/garmin196.xml</path>
+        <name>Garmin196-GPS-support</name>
+        <path>Interior/Panel/garmin196/garmin196_support.xml</path>
         <offsets>
-            <x-m>-0.305</x-m>
-            <y-m> 0.36584</y-m>
-            <z-m> 0.08948</z-m>
-            <heading-deg>-19.0</heading-deg>
+            <x-m>-0.4</x-m>
+            <y-m>0.36</y-m>
+            <z-m>0.205</z-m>
+            <heading-deg>-12.0</heading-deg>
         </offsets>
-        <condition>
-            <equals>
-               <property alias="/params/bushkit"/>
-               <value>4</value>
-            </equals>
-        </condition>
     </model>
+    <animation>
+        <type>select</type>
+        <object-name>Garmin196-GPS</object-name>
+        <object-name>Garmin196-GPS-support</object-name>
+        <condition>
+            <property>/sim/model/c172p/garmin196-visible</property>
+        </condition>
+    </animation>-->
 
     <model>
         <name>GPS-Model</name>
@@ -315,36 +332,6 @@
             </not>
         </condition>
     </animation>
-
-    <!-- Canvas local Garmin 196 GPS -->
-    <!--<model>
-        <name>Garmin196-GPS</name>
-        <path>Interior/Panel/garmin196/garmin196.xml</path>
-        <offsets>
-            <x-m>-0.4</x-m>
-            <y-m>0.36</y-m>
-            <z-m>0.205</z-m>
-            <heading-deg>-12.0</heading-deg>
-        </offsets>
-    </model>
-    <model>
-        <name>Garmin196-GPS-support</name>
-        <path>Interior/Panel/garmin196/garmin196_support.xml</path>
-        <offsets>
-            <x-m>-0.4</x-m>
-            <y-m>0.36</y-m>
-            <z-m>0.205</z-m>
-            <heading-deg>-12.0</heading-deg>
-        </offsets>
-    </model>
-    <animation>
-        <type>select</type>
-        <object-name>Garmin196-GPS</object-name>
-        <object-name>Garmin196-GPS-support</object-name>
-        <condition>
-            <property>/sim/model/c172p/garmin196-visible</property>
-        </condition>
-    </animation>-->
 
     <nasal>
         <load>
@@ -928,22 +915,36 @@
         <object-name>SeatMounts.0</object-name>
         <object-name>SeatMounts.1</object-name>
         <object-name>SeatMounts.2</object-name>
-        <object-name>SeatMounts.3</object-name>
+
     </effect>
+
+    <effect>
+        <inherits-from>Effects/interior/interior-glass-reflection-panel-front</inherits-from>
+        <object-name>glass_panel</object-name>
+    </effect>
+
     <effect>
         <inherits-from>Effects/interior/c172p-interior-glass-reflection-front</inherits-from>
         <object-name>glas_interior</object-name>
     </effect>
     <effect>
-        <inherits-from>Effects/interior/interior-glass-reflection-panel-front</inherits-from>
-        <object-name>glass_panel</object-name>
+        <inherits-from>Effects/interior/c172p-interior-glass-front-sides</inherits-from>
+        <object-name>glas_front_interior_sides</object-name>
     </effect>
     <effect>
-        <inherits-from>Effects/interior/c172p-interior-glass-reflection-side</inherits-from>
-        <object-name>glas_front_interior_sides</object-name>
+        <inherits-from>Effects/interior/c172p-interior-glass-window-left</inherits-from>
         <object-name>leftwindow_interior</object-name>
+    </effect>
+    <effect>
+        <inherits-from>Effects/interior/c172p-interior-glass-window-right</inherits-from>
         <object-name>rightwindow_interior</object-name>
+    </effect>
+    <effect>
+        <inherits-from>Effects/interior/c172p-interior-glass-back-sides</inherits-from>
         <object-name>glas_interior_sides</object-name>
+    </effect>
+    <effect>
+        <inherits-from>Effects/interior/c172p-interior-glass-back</inherits-from>
         <object-name>glas_interior_back</object-name>
     </effect>
 
@@ -2141,6 +2142,16 @@
         </offsets>
     </model>
     <!-- MODEND: Floats Wake-->
+
+    <model>
+        <path>Effects/pontoon/eng-spray.xml</path>
+        <name>eng-spray</name>
+        <offsets>
+            <x-m>-1.0 </x-m>
+            <y-m> 1.15</y-m>
+            <z-m>-5.0 </z-m>
+        </offsets>
+    </model>
 
     <!-- Labels activated by hotspots -->
     <text>
@@ -3534,6 +3545,45 @@
             <y>1.0</y>
         </axis>
     </animation>
+
+    <!-- Animate the pilot seat (optional) -->
+    <!--
+    <animation>
+        <type>translate</type>
+        <object-name>pilotseat_left</object-name>
+        <property>sim/current-view/user/y-offset-m</property>
+        <factor>1</factor>
+        <offset-m>-0.208</offset-m>
+        <axis>
+            <z>1.0</z>
+        </axis>
+    </animation>
+    <animation>
+        <type>translate</type>
+        <object-name>pilotseat_left</object-name>
+        <property>sim/current-view/user/z-offset-m</property>
+        <factor>1</factor>
+        <offset-m>-0.36</offset-m>
+        <axis>
+            <x>1.0</x>
+        </axis>
+    </animation>
+    <animation>
+        <type>rotate</type>
+        <object-name>pilotseat_left</object-name>
+        <property>sim/current-view/user/pitch-offset-deg</property>
+        <factor>1</factor>
+        <offset-deg>0.12</offset-deg>
+        <axis>
+            <x1-m> 0.17429</x1-m>
+            <y1-m>-0.37445</y1-m>
+            <z1-m>-0.61057</z1-m>
+            <x2-m> 0.17429</x2-m>
+            <y2-m>-0.10364</y2-m>
+            <z2-m>-0.61055</z2-m>
+        </axis>
+    </animation>
+    -->
 
     <!-- Pick animation for the doors -->
     <animation>
